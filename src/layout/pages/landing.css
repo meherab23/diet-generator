@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans+Mono:wght@100..900&display=swap');
+.navbar{
+    background: #282828;
+}
+.navbar .navbar-brand{
+    color: #fff;
+}
+.navbar .signin{
+    background: #F2800D;
+    color: #000;
+    font-weight: 500;
+    border-radius: 16px;
+}
+.navbar .started.nav-link{
+    background: #EEEEEE;
+    color: #000;
+    font-weight: 500;
+    border-radius: 16px;
+    margin-left: 15px;
+}
+.navbar .nav-link:hover{
+    color: #000;
+}
+
+.header {
+    margin-top: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.header .bg{
+    background-image: url(../../assests/images/bg.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+.header .bg .content{
+    color: #FFFFFF;
+    padding-left: 30px;
+    padding-right: 200px;
+    padding-bottom: 30px;
+    padding-top: 300px;
+}
+.header .bg .content h2{
+    font-weight: 700;
+    font-size: 48px;
+}
+.header .bg .content p{
+    font-size: 24px;
+    font-weight: 400;
+}
+.header .bg .content .wrap{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+.header .bg .content .wrap .signin{
+    background: #F2800D;
+    color: #000;
+    font-weight: 500;
+    border-radius: 16px;
+    padding: 10px 15px;
+}
+.header .bg .content .wrap .started{
+    background: #EEEEEE;
+    color: #000;
+    font-weight: 500;
+    border-radius: 16px;
+    margin-left: 15px;
+    padding: 10px 15px;
+}
+.title_content{
+    margin-top: 30px;
+}
+.title_content h2{
+    font-weight: 700;
+    font-size: 45px;
+}
+.title_content p{
+    font-size: 20px;
+    font-weight: 400;
+}
+.cards{
+    margin-top: 30px !important;
+}
+.cards .single_card img{
+    width: 100%;
+}
+.cards .single_card .content{
+    margin-top: 20px;
+}
+.footer{
+    background: #282828;
+    margin-top: 50px;
+}
+.footer .wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #fff;
+    padding: 20px 0;
+}
+.footer .wrap .logo{
+    color: #FFFFFF;
+    font-size: 20px;
+}
+.footer .cc{
+    color: #fff;
+    padding: 10px 0;
+}

@@ -1,0 +1,73 @@
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+.diet_form {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.diet_form h2{
+    text-align: center;
+    padding-bottom: 20px;
+}
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+form select{
+    width: 100%;
+    background: #DDDDDD;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border-radius: 15px;
+}
+form input{
+    width: 100%;
+    background: #DDDDDD;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border-radius: 15px;
+}
+input::placeholder {
+    color: #000; /* Replace with your desired color */
+    opacity: 1; /* Optional: Set to 1 to keep the color solid */
+    font-weight: 500;
+}
+/* Chrome, Safari, Edge, and Opera */
+input::-webkit-input-placeholder {
+    color: #000;
+    font-weight: 500;
+}
+
+/* Firefox 19+ */
+input::-moz-placeholder {
+    color: #000;
+    font-weight: 500;
+}
+
+/* Internet Explorer 10-11 */
+input:-ms-input-placeholder {
+    color: #000;
+    font-weight: 500;
+}
+
+/* Microsoft Edge */
+input::-ms-input-placeholder {
+    color: #000;
+    font-weight: 500;
+}
