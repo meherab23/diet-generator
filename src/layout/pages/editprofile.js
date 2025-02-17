@@ -44,19 +44,44 @@ function Profile() {
     setImagePreview(null);
   };
 
-  const handleSubmit = (event) => {
+  const [updatedName, setUpdatedName] = useState(name);
+  const [updatedPhone, setUpdatedPhone] = useState(phone);
+
+  const handleNameChange = (event) => {
+    setUpdatedName(event.target.value);
+  };
+
+  const handlePhoneChange = (event) => {
+    setUpdatedPhone(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const updatedUserInfo = {
-      name: event.target[0].value || name,
-      phone: event.target[3].value || phone,
-      // image: filepath,
+      userId: userInfo._id,
+      name: updatedName,
+      phone: updatedPhone,
+      image: filepath,
     };
-    localStorage.setItem(
-      "userinfo",
-      JSON.stringify({ ...userInfo, ...updatedUserInfo })
-    );
-    alert("Profile updated successfully!");
-    window.location.href = "/profile";
+
+    try {
+      const response = await axios.patch("http://localhost:3000/api/user/update", {
+        ...updatedUserInfo,
+        _id: _id,
+      });
+      if (response.status === 200) {
+        console.log(updatedUserInfo);
+        localStorage.setItem("userinfo",JSON.stringify({ ...userInfo, ...updatedUserInfo }));
+        // localStorage.setItem('userinfo', JSON.stringify(response.data.user));
+        alert("Profile updated successfully!");
+        window.location.href = "/profile";
+      } else {
+        alert("Failed to update profile. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      alert("An error occurred while updating the profile.");
+    }
   };
   return (
     <>
@@ -136,13 +161,13 @@ function Profile() {
                   <div className="col-8">
                     <div className="info">
                       <label htmlFor="">Name</label>
-                      <input type="text" placeholder={name} />
+                      <input type="text" placeholder={name} value={updatedName} onChange={handleNameChange}/>
                       <label htmlFor="">Username</label>
                       <input type="text" value={username} disabled />
                       <label htmlFor="">Email</label>
                       <input type="text" value={email} disabled />
                       <label htmlFor="">Phone</label>
-                      <input type="text" placeholder={phone} />
+                      <input type="text" placeholder={phone} value={updatedPhone} onChange={handlePhoneChange}/>
                     </div>
                     <div className="d-flex justify-content-end">
                       <button type="submit" className="btn btn-success">

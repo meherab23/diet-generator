@@ -74,25 +74,60 @@ const Diet = () => {
     console.log(formData);
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/diet/create",
-        {
-          userid: userInfo._id,
-          age,
-          gender,
-          height,
-          weight,
-          targetWeight,
-          diabetics,
-          routine: generatedText,
-        }
-      );
+      const datas = await axios.get("http://localhost:3000/api/diet/get");
 
-      if (response.status === 201) {
-        console.log("Diet plan saved successfully");
+      console.log(datas.data);
+
+      const userDiet = datas.data.find(diet => diet.userid === userInfo._id);
+      console.log("adasdad" , userDiet);
+
+      let response;
+      if (userDiet) {
+        response = await axios.patch(
+          `http://localhost:3000/api/diet/update/`,
+          {
+        dietid: userDiet._id,
+        userid: userInfo._id,
+        age,
+        gender,
+        height,
+        weight,
+        targetWeight,
+        diabetics,
+        routine: generatedText,
+          }
+        );
+        if (response.status === 201) {
+          console.log("Diet plan saved successfully");
+        } else {
+          console.error("Failed to save diet plan", response.data);
+        }
       } else {
-        console.error("Failed to save diet plan", response.data);
+        response = await axios.post(
+          "http://localhost:3000/api/diet/create",
+          {
+        userid: userInfo._id,
+        age,
+        gender,
+        height,
+        weight,
+        targetWeight,
+        diabetics,
+        routine: generatedText,
+          }
+        );
+        if (response.status === 201) {
+          console.log("Diet plan saved successfully");
+        } else {
+          console.error("Failed to save diet plan", response.data);
+        }
       }
+
+      // if (response.status === 201) {
+      //   console.log("Diet plan saved successfully");
+      // } else {
+      //   console.error("Failed to save diet plan", response.data);
+      // }
     } catch (error) {
       if (error.response) {
         console.error("Error saving diet plan", error.response.data);

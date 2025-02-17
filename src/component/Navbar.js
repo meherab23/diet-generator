@@ -12,9 +12,15 @@ const nav = () => {
   let iconStyles = { color: "white", fontSize: "15px"};
   let iconStylesNotification = { color: "white", fontSize: "20px"};
   let iconStylesRed = { color: "#FE0000", fontSize: "15px"};
+  const handleLogout = () => {
+    // Clear local storage data
+    localStorage.clear();
+    // Redirect to login page
+    window.location.href = "/login";
+  };
+
   return (
     <>
-
       <nav className="navbar navbar-expand-lg">
         <div className="container">
           <Link className="navbar-brand" to="/home">
@@ -48,17 +54,16 @@ const nav = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/profile">
+                <span className="nav-link" onClick={handleLogout} style={{ cursor: "pointer" }}>
                   <IoLogOutOutline style={iconStylesRed} />
-                </Link>
+                </span>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-
     </>
-  )
+  );
 }
 
 export default nav

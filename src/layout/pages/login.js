@@ -20,6 +20,7 @@ function Login() {
         email: email,
         password: password
       });
+      console.log(response.data.user);
       if (response.data.accessToken) {
         localStorage.setItem('userinfo', JSON.stringify(response.data.user));
         localStorage.setItem('authenticated', true);
