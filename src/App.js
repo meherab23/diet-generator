@@ -13,6 +13,7 @@ import Profile from "./layout/pages/profile";
 import Edit from "./layout/pages/editprofile";
 import Login from "./layout/pages/login";
 import Diet from "./layout/pages/dietplan";
+import Dashboard from "./layout/pages/dashboard";
 import Register from "./layout/pages/register";
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
         <Route path="/diet" element={<Diet />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/editprofile" element={<Edit />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Route>
     </Route>
   )

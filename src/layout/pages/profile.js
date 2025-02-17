@@ -5,6 +5,9 @@ import user from "../../assests/images/user.png";
 import "./profile.css";
 
 function Profile() {
+  const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+
+  const { name, username, email, phone, password } = userInfo;
   return (
     <>
       <div className="profile">
@@ -24,18 +27,18 @@ function Profile() {
             <div className="col-12">
               <div className="row align-items-center">
                 <div className="col-4">
-                <img src={user} alt="Goal 4" />
+                  <img src={user} alt="Goal 4" />
                 </div>
                 <div className="col-8">
                   <div className="info">
                     <label htmlFor="">Name</label>
-                    <input type="text"  value={"John Doe"} disabled/>
+                    <input type="text"  value={name} disabled/>
+                    <label htmlFor="">Username</label>
+                    <input type="text"  value={username} disabled/>
                     <label htmlFor="">Email</label>
-                    <input type="text"  value={"John@gmail.com"} disabled/>
+                    <input type="text"  value={email} disabled/>
                     <label htmlFor="">Phone</label>
-                    <input type="text"  value={"0123456789"} disabled/>
-                    <label htmlFor="">Password</label>
-                    <input type="password"  value={"123456789"} disabled/>
+                    <input type="text"  value={phone} disabled/>
                   </div>
                 </div>
               </div>

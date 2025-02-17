@@ -1,0 +1,49 @@
+.meal {
+    
+}
+.meal .day{
+    background-image: url(../../assests/images/day.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.meal .day .bg {
+    text-align: center;
+    margin: 0;
+    padding: 60px 0;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the last value (0.5) for opacity */
+}
+
+.weekly {
+    margin-top: 20px;   
+}
+
+.meal-plan{
+    margin-top: 20px;
+}
+
+.weekly .day{
+    background-image: url(../../assests/images/weekly.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.weekly .day .bg{
+    text-align: center;
+    margin: 0;
+    padding: 60px 0;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the last value (0.5) for opacity */
+}
+.wrap{
+    margin-top: 20px;
+}

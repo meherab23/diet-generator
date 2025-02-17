@@ -1,24 +1,35 @@
 // src/Login.js
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 import { IoIosEyeOff, IoIosEye } from "react-icons/io";
 import "./login.css";
+import axios from 'axios';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);  // Define showPassword state
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Replace with actual login logic (e.g., API call)
-    if (username === 'admin' && password === 'password') {
-      localStorage.setItem('authenticated', true);
-      navigate('/home');  // Redirect to the Home page
-    } else {
-      alert('Invalid credentials');
+    setErrorMessage("");
+    try {
+      const response = await axios.post('http://localhost:3000/api/auth/login', {
+        email: email,
+        password: password
+      });
+      if (response.data.accessToken) {
+        localStorage.setItem('userinfo', JSON.stringify(response.data.user));
+        localStorage.setItem('authenticated', true);
+        window.location.href = "/home";
+      } else {
+        setErrorMessage("Login failed. Please check your credentials.");
+      }
+    } catch (error) {
+      setErrorMessage("Login failed. Please check your credentials.");
+      console.error("Login failed", error);
     }
   };
 
@@ -37,11 +48,11 @@ function Login() {
               <form onSubmit={handleLogin}>
                 <div className="name mb-3 d-flex flex-row align-items-center">
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Username"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
                   />
                   <FaUser />
                 </div>

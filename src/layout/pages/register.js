@@ -4,24 +4,45 @@ import { useNavigate, Link } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 import { IoIosEyeOff, IoIosEye } from "react-icons/io";
 import "./login.css";
+import axios from 'axios';
 
 function Register() {
-//   const [username, setUsername] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);  // Define showPassword state
-//   const navigate = useNavigate();
-
-//   const handleLogin = (e) => {
-//     e.preventDefault();
-//     // Replace with actual login logic (e.g., API call)
-//     if (username === 'admin' && password === 'password') {
-//       localStorage.setItem('authenticated', true);
-//       navigate('/home');  // Redirect to the Home page
-//     } else {
-//       alert('Invalid credentials');
-//     }
-//   };
+  
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setErrorMessage("");
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      return;
+    }
+    const termsCheckbox = document.querySelector('input[type="checkbox"]');
+    if (!termsCheckbox.checked) {
+      setErrorMessage("You must agree to the Terms & Conditions.");
+      return;
+    }
+    try {
+      const response = await axios.post('http://localhost:3000/api/auth/register', {
+        username: username,
+        email: email,
+        password: password
+      });
+      if (response.data.accessToken) {
+        localStorage.setItem('authenticated', true);
+        window.location.href = "/login";
+      } else {
+        setErrorMessage("Registration failed. Please check your details.");
+      }
+    } catch (error) {
+      setErrorMessage("Registration failed. Please check your details.");
+      console.error("Registration failed", error);
+    }
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -35,13 +56,13 @@ function Register() {
             <h2>DIET GENERATOR</h2>
             <div className="login_area">
               <h4>Create an account</h4>
-              <form>
+              <form onSubmit={handleRegister}>
                 <div className="name mb-3" style={{ position: 'relative' }}>
                   <input
                     type="text"
                     className="form-control"
                     // value={username}
-                    // onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                     placeholder="Username"
                   />
                   <FaUser style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }} />
@@ -51,7 +72,7 @@ function Register() {
                     type="email"
                     className="form-control"
                     // value={username}
-                    // onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
                   />
                   <FaUser style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }} />
@@ -61,7 +82,7 @@ function Register() {
                     type={showPassword ? 'text' : 'password'}
                     className="form-control"
                     // value={password}
-                    // onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                   />
                   {showPassword ? (
@@ -81,7 +102,7 @@ function Register() {
                     type={showPassword ? 'text' : 'password'}
                     className="form-control"
                     // value={password}
-                    // onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirm Password"
                   />
                   {showPassword ? (
