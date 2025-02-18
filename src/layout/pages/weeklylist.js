@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import "./dashboard.css";
-import meal1 from "../../assests/images/meal-list-1.png";
-import meal2 from "../../assests/images/meal-list-2.png";
-import meal3 from "../../assests/images/meal-list-3.png";
-import meal4 from "../../assests/images/meal-list-4.png";
 import { useEffect } from "react";
 import axios from "axios";
 
-function Dashboard() {
-    const [activePlan, setActivePlan] = useState(null);
+function WeeklyList() {
     const [plan, setPlan] = useState(null);
     const userInfo = JSON.parse(localStorage.getItem("userinfo")) || {};
     useEffect(() => {
@@ -29,30 +24,14 @@ function Dashboard() {
         };
 
         fetchDietData();
-
-        fetchDietData();
     }, []);
-    const handleWeeklyClick = () => {
-        window.location.href = "/weeklylist";
-    };
-
     return (
         <>
             <div className="container">
-                <h3>Meal Plan</h3>
-                {/* Weekly Section */}
-                <div className="weekly">
-                    <div className="day" onClick={handleWeeklyClick}>
-                        <div className="bg">
-                            <h4>Weekly</h4>
-                        </div>
-                    </div>
-                </div>
-                {activePlan === "weekly" && plan && (
                     <div>
                         <h4>Weekly Meal Plan</h4>
                         <div className="row">
-                            {plan.routine.map((dayPlan, index) => (
+                            {plan && plan.routine && plan.routine.map((dayPlan, index) => (
                                 <div className="col-12" key={index}>
                                     <div className="meal-plan">
                                         <h5>{dayPlan.day}</h5>
@@ -64,10 +43,9 @@ function Dashboard() {
                             ))}
                         </div>
                     </div>
-                )}
             </div>
         </>
     );
 };
 
-export default Dashboard;
+export default WeeklyList;

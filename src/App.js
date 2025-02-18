@@ -15,6 +15,7 @@ import Login from "./layout/pages/login";
 import Diet from "./layout/pages/dietplan";
 import Dashboard from "./layout/pages/dashboard";
 import Register from "./layout/pages/register";
+import WeeklyList from "./layout/pages/weeklylist";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/editprofile" element={<Edit />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/weeklylist" element={<WeeklyList />}></Route>
       </Route>
     </Route>
   )

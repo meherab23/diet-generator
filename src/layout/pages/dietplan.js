@@ -7,11 +7,11 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const Diet = () => {
   const [csvData, setCsvData] = useState(null);
   const [response, setResponse] = useState("");
+  const [showdelayedtext,setShowDelayedText]=useState(false)
   const genAI = new GoogleGenerativeAI(
     "AIzaSyDWHdv51u0gIjFVA_D8WZze9pWSbxQFrBM"
   );
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-  // const prompt = "I am age 26, gender Male, height 164cm, weight 75kg, target weight 62. Give me a Proper Plan of diet meal for 7 days. 3 times food with snacks and also adding some details from a file.. Check that and get ideas from it. Also say about the calories and  amount food I need to intake. Do not say anything extra. Just give me the information for the diet of 7 days. Start it From Day 1. here is a sample 7-day diet plan based on your provided information (age 26, male, 164cm, 75kg, target 62kg). This is a sample and should be adjusted based on your individual needs and preferences. **Consult with a doctor or registered dietitian for personalized guidance.** The calorie target is approximately 1500-1700 calories per day to promote weight loss. These are extra talks. No suggestions too. No star Marks or anything! Just me give info like this, Day 1 Breakfast:this this, Lunch: this this, Dinner This this."
 
   useEffect(() => {
     fetch("/data.csv") // Fetch from public folder
@@ -25,11 +25,6 @@ const Diet = () => {
       .catch((error) => console.error("Error loading CSV:", error));
   }, []);
 
-  //    const handleGenerate= async ()=>{
-  //     const result = await model.generateContent(prompt);//+ JSON.stringify(csvData)
-  //     console.log(result.response.text());
-  //     console.log(await result.response.text());
-  //    }
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [height, setHeight] = useState("");
@@ -44,22 +39,210 @@ const Diet = () => {
   // }, [userInfo._id]);
 
   const handleGenerate = async () => {
-    const userPrompt = `I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
-    Give me a Proper Plan of diet meal for 7 days. 3 times food with snacks and also adding some details from a file.. Check that and get ideas from it. 
-    Also say about the calories and amount food I need to intake. Do not say anything extra. Just give me the information for the diet of 7 days. 
-    Start it From Day 1. here is a sample 7-day diet plan based on your provided information 
-    (age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}. 
-    This is a sample and should be adjusted based on your individual needs and preferences. 
-    **Consult with a doctor or registered dietitian for personalized guidance.** 
-    The calorie target is approximately 1500-1700 calories per day to promote weight loss. 
-    These are extra talks. No suggestions too. No star Marks or anything! Just me give info like this, Day 1 Breakfast:this this, 
-    Lunch: this this, Dinner This this. Do not give any Important notes or anything extra for lines or anything`;
-    const result = await model.generateContent(userPrompt);
-    console.log(await result.response.text());
 
-    const generatedText = await result.response.text();
-    console.log(generatedText);
+    // day 1 details
+    console.log("DAY 1")
+    const day1breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+    Give me a Proper Plan of diet meal for day 1 breakfast. Do not give any options!!
+    Also say about the calories and amount food I need to intake. Do not say anything extra. 
+    Start it From day 1.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 1 breakfast plan:
+    **day 1**.directly give me the information! Just say it like this... " breakfast: oatmeals and nuts. Do not have to say day 1.just give me the breakfast."`)
+    const day1bk=await day1breakfast.response.text()
+    console.log(day1bk);
 
+    const day1lunch= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+      Give me a Proper Plan of diet meal for day 1 Lunch. Do not give any options!!
+      Also say about amount food I need to intake. Do not say anything extra. 
+      .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 1 lunch plan:
+      **day 1**.directly give me the information! Just say it like this... " Lunch: oatmeals and nuts. Do not have to say day 1.just give me the Lunch."`)
+      const day1lch=await day1lunch.response.text()
+      console.log(day1lch);
+
+      const day1dinner= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+        Give me a Proper Plan of diet meal for day 1 dinner. Do not give any options!!
+        Also say about the  amount food I need to intake. Do not say anything extra. 
+        .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 1 dinner plan:
+        **day 1**.directly give me the information! Just say it like this... " dinner: oatmeals and nuts. Do not have to say day 1.just give me the dinner."`)
+        const day1dnr=await day1dinner.response.text()
+        console.log(day1dnr);
+
+        setTimeout(() => {
+          setShowDelayedText(true);
+      }, 3000);
+        //day 2 details
+        console.log("DAY 2")
+        const day2breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+          Give me a Proper Plan of diet meal for day 2 breakfast. Do not give any options!!
+          Also say about the  amount food I need to intake. Do not say anything extra I have day 1 breakfast meal plan. Start it From day 2.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 1 breakfast plan:
+          **day 2**.directly give me the information! Just say it like this... " breakfast: oatmeals and nuts. Do not have to say day 2.just give me the breakfast."`)
+          const day2bk=await day2breakfast.response.text()
+          console.log(day2bk);
+      
+          const day2lunch= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+            Give me a Proper Plan of diet meal for day 2 Lunch. Do not give any options!!
+            Also say about the amount food I need to intake. Do not say anything extra. 
+            .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..I have day 1 Lunch meal plan. Dont say anything extra like Okay, here's a day 2 lunch plan:
+            **day 2**.directly give me the information! Just say it like this... " Lunch: oatmeals and nuts. calories:170cal. Do not have to say day 2.just give me the Lunch."`)
+            const day2lch=await day2lunch.response.text()
+            console.log(day2lch);
+      
+            const day2dinner= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+              Give me a Proper Plan of diet meal for day 2 dinner. Do not give any options!!
+              Also say about the amount food I need to intake. Do not say anything extra. I have day 1 dinner meal plan.
+              .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 2 dinner plan:
+              **day 2**.directly give me the information! Just say it like this... " dinner: oatmeals and nuts. calories:170cal. Do not have to say day 1.just give me the dinner."`)
+              const day2dnr=await day2dinner.response.text()
+              console.log(day2dnr);
+
+              setTimeout(() => {
+                setShowDelayedText(true);
+            }, 3000);
+              
+        //day 3 details
+        console.log("DAY 3")
+        const day3breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+          Give me a Proper Plan of diet meal for day 3 breakfast. Do not give any options!!
+          Also say about the  amount food I need to intake. Do not say anything extra I have day 2 breakfast meal plan. Start it From day 3.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 1 breakfast plan:
+          **day 3**.directly give me the information! Just say it like this... " breakfast: oatmeals and nuts. Do not have to say day 3.just give me the breakfast."`)
+          const day3bk=await day3breakfast.response.text()
+          console.log(day3bk);
+      
+          const day3lunch= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+            Give me a Proper Plan of diet meal for day 3 Lunch. Do not give any options!!
+            Also say about the amount food I need to intake. Do not say anything extra. 
+            .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..I have day 2 Lunch meal plan. Dont say anything extra like Okay, here's a day 3 lunch plan:
+            **day 3**.directly give me the information! Just say it like this... " Lunch: oatmeals and nuts. calories:170cal. Do not have to say day 3.just give me the Lunch."`)
+            const day3lch=await day3lunch.response.text()
+            console.log(day3lch);
+      
+            const day3dinner= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+              Give me a Proper Plan of diet meal for day 3 dinner. Do not give any options!!
+              Also say about the amount food I need to intake. Do not say anything extra. I have day 2 dinner meal plan.
+              .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 3 dinner plan:
+              **day 3**.directly give me the information! Just say it like this... " dinner: oatmeals and nuts. calories:170cal. Do not have to say day 3.just give me the dinner."`)
+              const day3dnr=await day3dinner.response.text()
+              console.log(day3dnr);
+
+              setTimeout(() => {
+                setShowDelayedText(true);
+            }, 3000);
+        //////////////////////////////////////////             
+        //day 4 details//////////////////////////
+        /////////////////////////////////////////
+        console.log("DAY 4")
+        const day4breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+          Give me a Proper Plan of diet meal for day 3 breakfast. Do not give any options!!
+          Also say about the  amount food I need to intake. Do not say anything extra. Start it From day 4.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..I have day 3 breakfast meal plan. Dont say anything extra like Okay, here's a day 1 breakfast plan:
+          **day 4**.directly give me the information! Just say it like this... " breakfast: oatmeals and nuts. Do not have to say day 4.just give me the breakfast."`)
+          const day4bk=await day4breakfast.response.text()
+          console.log(day4bk);
+      
+          const day4lunch= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+            Give me a Proper Plan of diet meal for day 3 Lunch. Do not give any options!!
+            Also say about the amount food I need to intake. Do not say anything extra. 
+            .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..I have day 3 Lunch meal plan. Dont say anything extra like Okay, here's a day 3 lunch plan:
+            **day 4**.directly give me the information! Just say it like this... " Lunch: oatmeals and nuts. calories:170cal. Do not have to say day 4.just give me the Lunch."`)
+            const day4lch=await day4lunch.response.text()
+            console.log(day4lch);
+      
+            const day4dinner= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+              Give me a Proper Plan of diet meal for day 4 dinner. Do not give any options!!
+              Also say about the amount food I need to intake. Do not say anything extra. I have day 3 dinner meal plan.
+              .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 4 dinner plan:
+              **day 4**.directly give me the information! Just say it like this... " dinner: oatmeals and nuts. calories:170cal. Do not have to say day 4.just give me the dinner."`)
+              const day4dnr=await day4dinner.response.text()
+              console.log(day4dnr);
+              setTimeout(() => {
+                setShowDelayedText(true);
+            }, 3000);
+              
+        //////////////////////////////////////////             
+        //day 5 details//////////////////////////
+        /////////////////////////////////////////
+        console.log("DAY 5")
+        const day5breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+          Give me a Proper Plan of diet meal for day 5 breakfast. Do not give any options!!
+          Also say about the  amount food I need to intake. Do not say anything extra I have day 4 breakfast meal plan. Start it From day 5.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 1 breakfast plan:
+          **day 5**.directly give me the information! Just say it like this... " breakfast: oatmeals and nuts. Do not have to say day 5.just give me the breakfast."`)
+          const day5bk=await day5breakfast.response.text()
+          console.log(day5bk);
+      
+          const day5lunch= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+            Give me a Proper Plan of diet meal for day 5 Lunch. Do not give any options!!
+            Also say about the amount food I need to intake. Do not say anything extra. 
+            .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..I have day 4 Lunch meal plan. Dont say anything extra like Okay, here's a day 3 lunch plan:
+            **day 5**.directly give me the information! Just say it like this... " Lunch: oatmeals and nuts. calories:170cal. Do not have to say day 5.just give me the Lunch."`)
+            const day5lch=await day5lunch.response.text()
+            console.log(day5lch);
+      
+            const day5dinner= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+              Give me a Proper Plan of diet meal for day 5 dinner. Do not give any options!!
+              Also say about the amount food I need to intake. Do not say anything extra. I have day 4 dinner meal plan.
+              .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 5 dinner plan:
+              **day 5**.directly give me the information! Just say it like this... " dinner: oatmeals and nuts. calories:170cal. Do not have to say day 5.just give me the dinner."`)
+              const day5dnr=await day5dinner.response.text()
+              console.log(day5dnr);
+
+
+              setTimeout(() => {
+                setShowDelayedText(true);
+            }, 3000);
+        //////////////////////////////////////////             
+        //day 6 details//////////////////////////
+        /////////////////////////////////////////
+        // console.log("DAY 6")
+        // const day6breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+        //   Give me a Proper Plan of diet meal for day 3 breakfast. 
+        //   Also say about the  amount food I need to intake. Do not say anything extra I have day 5 breakfast meal plan. Start it From day 6.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 1 breakfast plan:
+        //   **day 6**.directly give me the information! Just say it like this... " breakfast: oatmeals and nuts. Do not have to say day 6.just give me the breakfast."`)
+        //   const day6bk=await day6breakfast.response.text()
+        //   console.log(day6bk);
+      
+        //   const day6lunch= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+        //     Give me a Proper Plan of diet meal for day 3 Lunch. 
+        //     Also say about the amount food I need to intake. Do not say anything extra. 
+        //     .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..I have day 5 Lunch meal plan. Dont say anything extra like Okay, here's a day 3 lunch plan:
+        //     **day 6**.directly give me the information! Just say it like this... " Lunch: oatmeals and nuts. calories:170cal. Do not have to say day 6.just give me the Lunch."`)
+        //     const day6lch=await day6lunch.response.text()
+        //     console.log(day6lch);
+      
+        //     const day6dinner= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+        //       Give me a Proper Plan of diet meal for day 6 dinner. 
+        //       Also say about the amount food I need to intake. Do not say anything extra. I have day 5 dinner meal plan.
+        //       .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 6 dinner plan:
+        //       **day 6**.directly give me the information! Just say it like this... " dinner: oatmeals and nuts. calories:170cal. Do not have to say day 6.just give me the dinner."`)
+        //       const day6dnr=await day6dinner.response.text()
+        //       console.log(day6dnr);
+              
+        //         setTimeout(() => {
+        //         setShowDelayedText(true);
+        //       }, 2000);
+        //       //////////////////////////////////////////             
+        // //day 7 details//////////////////////////
+        // /////////////////////////////////////////
+        // console.log("DAY 7")
+        // const day7breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+        //   Give me a Proper Plan of diet meal for day 3 breakfast. 
+        //   Also say about the  amount food I need to intake. Do not say anything extra I have day 6 breakfast meal plan. Start it From day 7.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 1 breakfast plan:
+        //   **day 7**.directly give me the information! Just say it like this... " breakfast: oatmeals and nuts. Do not have to say day 7.just give me the breakfast."`)
+        //   const day7bk=await day7breakfast.response.text()
+        //   console.log(day7bk);
+      
+        //   const day7lunch= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+        //     Give me a Proper Plan of diet meal for day 3 Lunch. 
+        //     Also say about the amount food I need to intake. Do not say anything extra. 
+        //     .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..I have day 6 Lunch meal plan. Dont say anything extra like Okay, here's a day 3 lunch plan:
+        //     **day 7**.directly give me the information! Just say it like this... " Lunch: oatmeals and nuts. calories:170cal. Do not have to say day 7.just give me the Lunch."`)
+        //     const day7lch=await day7lunch.response.text()
+        //     console.log(day7lch);
+      
+        //     const day7dinner= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
+        //       Give me a Proper Plan of diet meal for day 7 dinner. 
+        //       Also say about the amount food I need to intake. Do not say anything extra. I have day 6 dinner meal plan.
+        //       .(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 7 dinner plan:
+        //       **day 7**.directly give me the information! Just say it like this... " dinner: oatmeals and nuts. calories:170cal. Do not have to say day 7.just give me the dinner."`)
+        //       const day7dnr=await day7dinner.response.text()
+        //       console.log(day7dnr);
     const formData = {
       userid: userInfo._id,
       age,
@@ -68,7 +251,50 @@ const Diet = () => {
       weight,
       targetWeight,
       diabetics,
-      routine: generatedText,
+      routine: [
+        {
+          day:"Day 1",
+          breakfast:day1bk,
+          lunch:day1lch,
+          dinner:day1dnr
+        },
+        {
+          day:"Day 2",
+          breakfast:day2bk,
+          lunch:day2lch,
+          dinner:day2dnr
+        },
+        {
+          day:"Day 3",
+          breakfast:day3bk,
+          lunch:day3lch,
+          dinner:day3dnr
+        },
+        {
+          day:"Day 4",
+          breakfast:day4bk,
+          lunch:day4lch,
+          dinner:day4dnr
+        },
+        {
+          day:"Day 5",
+          breakfast:day5bk,
+          lunch:day5lch,
+          dinner:day5dnr
+        },
+        {
+          day:"Day 6",
+          breakfast:day1bk,
+          lunch:day3lch,
+          dinner:day2dnr
+        },
+        {
+          day:"Day 7",
+          breakfast:day4bk,
+          lunch:day2lch,
+          dinner:day1dnr
+        },
+      ],
     };
 
     console.log(formData);
@@ -94,7 +320,50 @@ const Diet = () => {
         weight,
         targetWeight,
         diabetics,
-        routine: generatedText,
+        routine: [
+          {
+            day:"Day 1",
+            breakfast:day1bk,
+            lunch:day1lch,
+            dinner:day1dnr
+          },
+          {
+            day:"Day 2",
+            breakfast:day2bk,
+            lunch:day2lch,
+            dinner:day2dnr
+          },
+          {
+            day:"Day 3",
+            breakfast:day3bk,
+            lunch:day3lch,
+            dinner:day3dnr
+          },
+          {
+            day:"Day 4",
+            breakfast:day4bk,
+            lunch:day4lch,
+            dinner:day4dnr
+          },
+          {
+            day:"Day 5",
+            breakfast:day5bk,
+            lunch:day5lch,
+            dinner:day5dnr
+          },
+          {
+            day:"Day 6",
+            breakfast:day1bk,
+            lunch:day3lch,
+            dinner:day2dnr
+          },
+          {
+            day:"Day 7",
+            breakfast:day4bk,
+            lunch:day2lch,
+            dinner:day1dnr
+          },
+        ],
           }
         );
         if (response.status === 201) {
@@ -113,7 +382,50 @@ const Diet = () => {
         weight,
         targetWeight,
         diabetics,
-        routine: generatedText,
+        routine: [
+          {
+            day:"Day 1",
+            breakfast:day1bk,
+            lunch:day1lch,
+            dinner:day1dnr
+          },
+          {
+            day:"Day 2",
+            breakfast:day2bk,
+            lunch:day2lch,
+            dinner:day2dnr
+          },
+          {
+            day:"Day 3",
+            breakfast:day3bk,
+            lunch:day3lch,
+            dinner:day3dnr
+          },
+          {
+            day:"Day 4",
+            breakfast:day4bk,
+            lunch:day4lch,
+            dinner:day4dnr
+          },
+          {
+            day:"Day 5",
+            breakfast:day5bk,
+            lunch:day5lch,
+            dinner:day5dnr
+          },
+          {
+            day:"Day 6",
+            breakfast:day1bk,
+            lunch:day3lch,
+            dinner:day2dnr
+          },
+          {
+            day:"Day 7",
+            breakfast:day4bk,
+            lunch:day2lch,
+            dinner:day1dnr
+          },
+        ],
           }
         );
         if (response.status === 201) {
