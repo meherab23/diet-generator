@@ -14,6 +14,10 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export const landing = () => {
     let iconStyles = { color: "white", fontSize: "20px", marginLeft: "15px"};
+    const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+    if (!userInfo) {
+        window.location.href = "/login";
+    }
   return (
     <>
       <nav className="navbar navbar-expand-lg">

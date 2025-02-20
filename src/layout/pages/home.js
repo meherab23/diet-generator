@@ -7,6 +7,10 @@ import goal_4 from "../../assests/images/goal 4.png";
 import goal_5 from "../../assests/images/goal 5.png";
 
 function Home() {
+  const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+    if (!userInfo) {
+        window.location.href = "/login";
+    }
   return (
     <>
       <div className="home">

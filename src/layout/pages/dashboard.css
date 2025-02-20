@@ -23,8 +23,99 @@
     margin-top: 20px;   
 }
 
+.input-container {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+}
+
+.input-field {
+    padding: 5px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    background: transparent;
+    margin: 0 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.input-field:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.input-label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #888;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown) + .input-label {
+    top: 5px;
+    font-size: 12px;
+    color: #007bff;
+    background: white;
+    padding: 0 5px;
+}
+
+.button {
+    display: inline-block;
+    padding: 7px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.button:hover {
+    background: linear-gradient(135deg, #0056b3, #003f7f);
+    box-shadow: 0 6px 15px rgba(0, 91, 187, 0.4);
+    /* transform: translateY(-2px); */
+}
+
+.button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 91, 187, 0.5);
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 10%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease-in-out;
+}
+
+.button:focus::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+}
+
+
 .meal-plan{
     margin-top: 20px;
+    padding-right: 20px;
 }
 
 .weekly .day{
@@ -46,4 +137,9 @@
 }
 .wrap{
     margin-top: 20px;
+}
+
+.weeky-list{
+    margin-top: 20px;
+    
 }

@@ -5,7 +5,10 @@ import { RxCross1 } from "react-icons/rx";
 import axios from "axios";
 
 function Profile() {
-  const userInfo = JSON.parse(localStorage.getItem("userinfo")) || {};
+  const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+    if (!userInfo) {
+        window.location.href = "/login";
+    }
 
   // console.log("adsad", userInfo);
   const { name, username, email, phone, password, _id } = userInfo;
@@ -100,21 +103,26 @@ function Profile() {
               <div className="col-12">
                 <div className="row align-items-center">
                   <div className="col-4">
-                    <div className="bg-pale-green p-4 rounded-xl">
+                    <div className="">
                       <div className="">
                         {imagePreview ? (
-                          <div className="relative">
-                            <img
-                              src={imagePreview}
-                              alt="Preview"
-                              className="rounded-md w-full h-full object-cover"
-                            />
-                            <button
-                              onClick={handleRemoveImage}
-                              className="absolute top-2 right-2 bg-black bg-opacity-40 hover:bg-opacity-80 duration-700 text-white rounded-full font-bold p-2"
-                            >
-                              <RxCross1 className="font-bold text-xl" />
-                            </button>
+                          <div className="image-wrap">
+                            <div className="image">
+                              <img
+                                src={imagePreview}
+                                alt="Preview"
+                                className=""
+                                width='100%'
+                              />
+                              </div>
+                              <div>
+                              <button
+                                onClick={handleRemoveImage}
+                                className="button"
+                              >
+                                <RxCross1 className="font-bold text-xl" />
+                              </button>
+                            </div>
                           </div>
                         ) : (
                           <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">

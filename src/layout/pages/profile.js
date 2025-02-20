@@ -6,8 +6,11 @@ import "./profile.css";
 
 function Profile() {
   const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+    if (!userInfo) {
+        window.location.href = "/login";
+    }
 
-  const { name, username, email, phone, password } = userInfo;
+  const { name, username, email, phone, password, image } = userInfo;
   return (
     <>
       <div className="profile">
@@ -27,7 +30,11 @@ function Profile() {
             <div className="col-12">
               <div className="row align-items-center">
                 <div className="col-4">
-                  <img src={user} alt="Goal 4" />
+                  <div className='image-wrap'>
+                    <div className="image">
+                      <img src={`http://localhost:3000${image}`} alt="Goal 4" width='100%'/>
+                    </div>
+                  </div>
                 </div>
                 <div className="col-8">
                   <div className="info">

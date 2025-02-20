@@ -12,6 +12,8 @@ const nav = () => {
   let iconStyles = { color: "white", fontSize: "15px"};
   let iconStylesNotification = { color: "white", fontSize: "20px"};
   let iconStylesRed = { color: "#FE0000", fontSize: "15px"};
+  const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+  const { name, username, email, phone, password, image } = userInfo;
   const handleLogout = () => {
     // Clear local storage data
     localStorage.clear();
@@ -45,12 +47,13 @@ const nav = () => {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/profile">
-                  <FaUser style={iconStyles} />
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/profile">
-                  <IoIosNotifications style={iconStylesNotification} />
+                  {image ? (
+                    <div className='profile_img_icon'>
+                      <img src={`http://localhost:3000${image}`} alt="" width="100%" height="100%"/>
+                    </div>
+                  ) : (
+                    <FaUser style={iconStyles} />
+                  )}
                 </Link>
               </li>
               <li className="nav-item">

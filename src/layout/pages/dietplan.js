@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./dietplan.css";
 import Papa from "papaparse";
 import axios from "axios";
+import { RotatingLines } from 'react-loader-spinner'
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const Diet = () => {
+  const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+    if (!userInfo) {
+        window.location.href = "/login";
+    }
   const [csvData, setCsvData] = useState(null);
   const [response, setResponse] = useState("");
   const [showdelayedtext,setShowDelayedText]=useState(false)
@@ -31,15 +36,15 @@ const Diet = () => {
   const [weight, setWeight] = useState("");
   const [targetWeight, setTargetWeight] = useState("");
   const [diabetics, setDiabetics] = useState("");
+  const [spinner, setSpinner] = useState(false);
 
-  const userInfo = JSON.parse(localStorage.getItem("userinfo")) || {};
   //   const { name, username, email, phone, password } = userInfo;
   // useEffect(() => {
   //   setUserid(userInfo._id);
   // }, [userInfo._id]);
 
   const handleGenerate = async () => {
-
+    setSpinner(true);
     // day 1 details
     console.log("DAY 1")
     const day1breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
@@ -131,11 +136,12 @@ const Diet = () => {
         /////////////////////////////////////////
         console.log("DAY 4")
         const day4breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
-          Give me a Proper Plan of diet meal for day 3 breakfast. Do not give any options!!
-          Also say about the  amount food I need to intake. Do not say anything extra. Start it From day 4.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..I have day 3 breakfast meal plan. Dont say anything extra like Okay, here's a day 1 breakfast plan:
+          Give me a Proper Plan of diet meal for day 4 breakfast. Do not give any options!!
+          Also say about the  amount food I need to intake. Do not say anything extra I have day 3 breakfast meal plan. Start it From day 4.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 3 breakfast plan:
           **day 4**.directly give me the information! Just say it like this... " breakfast: oatmeals and nuts. Do not have to say day 4.just give me the breakfast."`)
           const day4bk=await day4breakfast.response.text()
           console.log(day4bk);
+      
       
           const day4lunch= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
             Give me a Proper Plan of diet meal for day 3 Lunch. Do not give any options!!
@@ -299,6 +305,8 @@ const Diet = () => {
 
     console.log(formData);
 
+    setSpinner(false);
+
     try {
       const datas = await axios.get("http://localhost:3000/api/diet/get");
 
@@ -310,7 +318,7 @@ const Diet = () => {
       let response;
       if (userDiet) {
         response = await axios.patch(
-          `http://localhost:3000/api/diet/update/`,
+          `http://localhost:3000/api/diet/update`,
           {
         dietid: userDiet._id,
         userid: userInfo._id,
@@ -366,8 +374,10 @@ const Diet = () => {
         ],
           }
         );
-        if (response.status === 201) {
+        if (response.status === 200) {
           console.log("Diet plan saved successfully");
+          alert("Diet plan created successfully");
+          window.location.href = "/dashboard";
         } else {
           console.error("Failed to save diet plan", response.data);
         }
@@ -430,6 +440,8 @@ const Diet = () => {
         );
         if (response.status === 201) {
           console.log("Diet plan saved successfully");
+          alert("Diet plan created successfully");
+          window.location.href = "/dashboard";
         } else {
           console.error("Failed to save diet plan", response.data);
         }
@@ -496,16 +508,30 @@ const Diet = () => {
                   <option value="pre_diabetic">Pre-Diabetic</option>
                   <option value="none">None</option>
                 </select>
-                <div className="d-flex justify-content-end w-100">
+                <div className="d-flex align-items-center justify-content-between w-100">
+                  
                   <div className="btn btn-warning" onClick={handleGenerate}>
                     Generate
                   </div>
+                  {spinner && (
+                    <div><RotatingLines
+                      visible={true}
+                      height="20"
+                      width="20"
+                      color="grey"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      ariaLabel="rotating-lines-loading"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                      />
+                    </div>
+                  )}
                 </div>
               </form>
             </div>
           </div>
         </div>
-        <div></div>
       </div>
     </>
   );

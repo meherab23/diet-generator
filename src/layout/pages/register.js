@@ -33,7 +33,6 @@ function Register() {
         password: password
       });
       if (response.data.accessToken) {
-        localStorage.setItem('authenticated', true);
         window.location.href = "/login";
       } else {
         setErrorMessage("Registration failed. Please check your details.");
