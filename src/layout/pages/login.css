@@ -1,0 +1,118 @@
+.banner{
+    background-image: url(../../assests/images/login-bg.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow-y: hidden;
+}
+.banner .mainwrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50%;
+    transform: translateY(-50%);
+}
+.banner .mainwrap h2{
+    padding-bottom: 20px;
+}
+.banner .login_area{
+    width: 600px;
+    margin: auto;
+    border: 1px solid #282828;
+    border-radius: 16px;
+    padding: 35px 30px;
+    background: #fff;
+}
+.banner .login_area h4{
+    text-align: center;
+}
+.banner .login_area .name{
+    width: 100%;
+}
+.banner .login_area .password{
+    width: 100%;
+}
+.banner .login_area .check{
+    width: 100%;
+}
+.banner .login_area input:focus {
+    outline: none;
+    border: 1px solid transparent;
+}
+.banner .login_area .name {
+    border-bottom: 1px solid #292929;
+    padding-right: 10px;
+}
+.banner .login_area .name input{
+    border: none;
+    background: transparent;
+    padding-left: 0;
+    border-radius: 0;
+    color: #444444;
+    font-weight: 600;
+    margin: 0;
+}
+.banner .login_area .password {
+    border-bottom: 1px solid #292929;
+    padding-right: 10px;
+}
+.banner .login_area .password input{
+    border: none;
+    background: transparent;
+    padding-left: 0;
+    border-radius: 0;
+    color: #444444;
+    font-weight: 600;
+    margin: 0;
+}
+.banner .login_area .remember input {
+    background: #DDDDDD;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 500;
+    border-radius: 15px;
+    width: auto;
+    margin: 0;
+}
+.banner .login_area .remember{
+    color: #444444;
+    font-weight: 600;
+}
+.banner .login_area .remember span{
+    padding-left: 5px;
+}
+.banner .login_area .forget{
+    padding-top: 10px;
+}
+.banner .login_area .forget span{
+    color: #444444;
+    font-weight: 600;
+}
+.banner .login_area .submit_btn{
+    background: #292929;
+    color: #FFF;
+    padding: 5px 50px;
+    border-radius: 32px;
+    margin-bottom: 20px;
+}
+.banner .login_area .wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+.banner .login_area .register{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.banner .login_area .register .nav-link{
+    padding-left: 5px;
+    color: #444444;
+    font-weight: 600;
+}

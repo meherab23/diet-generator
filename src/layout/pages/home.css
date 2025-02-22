@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans+Mono:wght@100..900&display=swap');
+.home .navbar{
+    background: #282828;
+}
+.home .navbar .navbar-brand{
+    color: #fff;
+}
+.home .navbar .signin{
+    background: #F2800D;
+    color: #000;
+    font-weight: 500;
+    border-radius: 16px;
+}
+.home .navbar .started{
+    background: #EEEEEE;
+    color: #000;
+    font-weight: 500;
+    border-radius: 16px;
+    margin-left: 15px;
+}
+
+.home .header {
+    margin-top: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.home .header .bg{
+    background-image: url(../../assests/images/home-bg.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+.home .header .bg .contents{
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 200px 100px;
+}
+.home .header .bg .contents h2{
+    font-weight: 700;
+    font-size: 48px;
+}
+.home .header .bg .contents p{
+    font-size: 24px;
+    font-weight: 400;
+}
+.home .header .bg .contents .wrap{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+.home .header .bg .contents .wrap .signin{
+    background: #F2800D;
+    color: #000;
+    font-weight: 500;
+    border-radius: 16px;
+    padding: 10px 15px;
+}
+.home .header .bg .contents .wrap .started{
+    background: #EEEEEE;
+    color: #000;
+    font-weight: 500;
+    border-radius: 16px;
+    margin-left: 15px;
+    padding: 10px 15px;
+}
+.home .title_content{
+    margin-top: 30px;
+}
+.home .title_content h2{
+    font-weight: 700;
+    font-size: 45px;
+}
+.home .title_content p{
+    font-size: 20px;
+    font-weight: 400;
+}
+.home .cards{
+    margin-top: 30px !important;
+}
+.home .cards .single_card img{
+    width: 100%;
+}
+.home .cards .single_card .content{
+    margin-top: 20px;
+}
+.home .footer{
+    background: #282828;
+    margin-top: 50px;
+}
+.home .footer .wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #fff;
+    padding: 20px 0;
+}
+.home .footer .wrap .logo{
+    color: #FFFFFF;
+    font-size: 20px;
+}
+.home .footer .cc{
+    color: #fff;
+    padding: 10px 0;
+}

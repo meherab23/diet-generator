@@ -1,0 +1,14 @@
+.navbar .navbar-brand{
+    font-weight: 500;
+    font-size: 20px;
+}
+.nav-item .nav-link{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+.profile_img_icon{
+    width: 25px;
+    border-radius: 50%;
+    overflow: hidden;
+}
