@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/diet-generator/static/css/main.9975826b.css",
+    "main.js": "/diet-generator/static/js/main.fb3126ee.js",
+    "static/js/453.2d6e7f5e.chunk.js": "/diet-generator/static/js/453.2d6e7f5e.chunk.js",
+    "static/media/bg.png": "/diet-generator/static/media/bg.e7cd0152cf0117bea941.png",
+    "static/media/home-bg.png": "/diet-generator/static/media/home-bg.3f8c3f31f18b5e7bc7f9.png",
+    "static/media/weekly.png": "/diet-generator/static/media/weekly.cb4f13d9d25fd52592dc.png",
+    "static/media/day.png": "/diet-generator/static/media/day.c1a2b51c069c6407669c.png",
+    "static/media/login-bg.png": "/diet-generator/static/media/login-bg.2938dc321ce81f6e6b2d.png",
+    "static/media/meal-list-2.png": "/diet-generator/static/media/meal-list-2.01984ad92327b38143cf.png",
+    "static/media/meal-list-1.png": "/diet-generator/static/media/meal-list-1.2901d874e865cbe3d94f.png",
+    "static/media/user.png": "/diet-generator/static/media/user.4958b712e5d79097328d.png",
+    "static/media/meal-list-3.png": "/diet-generator/static/media/meal-list-3.ddf3d2af5e09e465d7c2.png",
+    "static/media/goal 1.png": "/diet-generator/static/media/goal 1.6101abc20eefebfb2a4e.png",
+    "static/media/goal 3.png": "/diet-generator/static/media/goal 3.295150b8136d9ee612c0.png",
+    "static/media/goal 2.png": "/diet-generator/static/media/goal 2.4fdbe7d43d26f8f9fb9f.png",
+    "static/media/goal 4.png": "/diet-generator/static/media/goal 4.6a53d4dfb3cc84adc546.png",
+    "static/media/goal 5.png": "/diet-generator/static/media/goal 5.3142404e1b65bec3dc17.png",
+    "index.html": "/diet-generator/index.html",
+    "main.9975826b.css.map": "/diet-generator/static/css/main.9975826b.css.map",
+    "main.fb3126ee.js.map": "/diet-generator/static/js/main.fb3126ee.js.map",
+    "453.2d6e7f5e.chunk.js.map": "/diet-generator/static/js/453.2d6e7f5e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9975826b.css",
+    "static/js/main.fb3126ee.js"
+  ]
+}
